@@ -187,7 +187,12 @@ If the creation has issues
 ```
 ./iris_cli --output=prettyjson --username=admin --password=admin --server=10.0.0.7 --skip_password_prompt=true --skip_force_password_change=true cluster cloud-create name=azurecluster node-ips=10.0.0.7 subnet-gateway=10.0.0.1 subnet-mask=255.255.255.0 dns-server-ips=8.8.8.8 ntp-servers=2.almalinux.pool.ntp.org domain-names=fusion.guru hostname=cohesity metadata-fault-tolerance=0 enable-software-encryption=false cluster-size=small
 ```
-
+Maybe add this?
+```
+ -default_cluster_password string
+    	Default cluster password to use.
+  -default_cluster_username string
+```
 
 You can control startup and shutdown of the cluster from this place:
 ```
