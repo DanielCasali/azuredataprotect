@@ -52,18 +52,50 @@ Saving to: ‘installer-cohesity_azure_setup-7.2.2_u2_release-20250718_86f4ecd0.
             installer-coh   1%[                                      ] 2096.00K  2.02MB/s
 ```
 
+9) Check if the youhave the files:
+```
+[cohesity@linux ~]$ ls -la
+total 35958228
+drwx------. 3 cohesity cohesity        4096 Oct 31 15:25 .
+drwxr-xr-x. 5 root     root              53 Oct 31 14:29 ..
+-rw-------. 1 cohesity cohesity         517 Oct 31 15:23 .bash_history
+-rw-r--r--. 1 cohesity cohesity          18 Apr 30  2024 .bash_logout
+-rw-r--r--. 1 cohesity cohesity         174 Oct 31 15:25 .bash_profile
+-rw-r--r--. 1 cohesity cohesity         492 Apr 30  2024 .bashrc
+-rw-r--r--. 1 cohesity cohesity 36537279488 Oct 31 15:21 cohesity-azure-7.2.2_u2_release-20250718_86f4ecd0.vhd
+-rw-r--r--. 1 cohesity cohesity   141131248 Oct 31 15:21 installer-cohesity_azure_setup-7.2.2_u2_release-20250718_86f4ecd0.tar.gz
+```
+
 9) Decompress the setup tool:
 ```
-tar -xvf installer-cohesity_azure_setup-7.2.2_u2_release-20250718_86f4ecd0.tar.gz
-cohesity_azure_setup-7.2.2_u2_release-20250718_86f4ecd0.tar.gz
-install.sh
+[cohesity@linux ~]$ tar -xf installer-cohesity_azure_setup-7.2.2_u2_release-20250718_86f4ecd0.tar.gz
+[cohesity@linux ~]$ 
 ```
 
 10) Run the installer
 For some reason it does not get the path right (it adds some /home/cohesity/bin/ but the software so not there so I link it):
 ```
-
+[cohesity@linux ~]$ sudo ./install.sh
+/etc/bashrc: line 12: BASHRCSOURCED: unbound variable
+[cohesity@linux ~]$ echo $PATH
+/home/cohesity/.local/bin:/home/cohesity/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
+[cohesity@linux ~]$ ls
+7.2.2_u2_release-20250718_86f4ecd0
+cohesity-azure-7.2.2_u2_release-20250718_86f4ecd0.vhd
+cohesity_azure_setup-7.2.2_u2_release-20250718_86f4ecd0.tar.gz
+installer-cohesity_azure_setup-7.2.2_u2_release-20250718_86f4ecd0.tar.gz
+install.sh
+software
 ```
+11) As you can see there is no bin, so I link the 7.2.2_u2_release-20250718_86f4ecd0 directory to the bin and iris_cli should be working as a it is in PATH:
+```
+[cohesity@linux ~]$ ln -s 7.2.2_u2_release-20250718_86f4ecd0 bin
+[cohesity@linux ~]$ iris_cli
+ Username:
+^C
+```
+If you are stuck on the Username: prompt we are not using it yet, you may Control+C to interrupt the iris_cli program you will get a error dump but do not worry.
+
 
 
 
