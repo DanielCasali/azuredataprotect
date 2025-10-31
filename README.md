@@ -2,10 +2,10 @@
 This guide will help you install IBM Defender Data Protect in Azure and it aims to get a Backup endpoint in Azure created by Cohesity that connect seamlessly to the IBM Defender DMS Console.
 
 
-# Create a basic linux install and prepare for setup
+## Create a basic linux install and prepare for setup
 We will install the IBM Defender Data Protect endpoint using setup tools created by Cohesity. The tools provided are based on linux and a small instance will be enough, I am using 1 vCPU and 3.5 GB of memory. I also use Azure spot discount since it is a PoC and I don't mind to restart the VM in case it comes down. this Server will not be in the Data Path.
 
-# Configure the Setup instance for the install
+## Configure the Setup instance for the install
 The install tool will expect to use the cohesity user by default and the `/home/cohesity` path as the install directory.
 Create the user and change to the user:
 ```
@@ -15,8 +15,7 @@ Create the user and change to the user:
 [cohesity@linux ~]$
 ```
 
-
-# Download the Assets from Fix Central
+## Download the Assets from Fix Central
 The Assets are available for Download on FixCentral, we will download the version 2.0.16, so after you login to it:
 1) Search for IBM Storage Defender Select Intalled Version: All and Platform All -> Click Continue 
 2) Select Browse for Fixes -> Click Continue 
@@ -102,9 +101,9 @@ The instance quota is normally not that high if you start for the first time, so
 az quota update --resource-name standardDSv2Family --scope /subscriptions/<subscription-id>/providers/Microsoft.Compute/locations/eastus --limit-object value=20
 ```
 
+## Install the cluster.
 
-
-
+First you need to ensure your params.json file is fine for use, here I have an example that I used with public DNS and NTP and IP address 10.0.0.7 on eastus location, be sure to change this if you
 ```
 {
   "azure_application_id" : "<Your Application ID>",
@@ -120,7 +119,7 @@ az quota update --resource-name standardDSv2Family --scope /subscriptions/<subsc
   "cohesity_azure_virtual_network_subnet_name" : "default",
   "cohesity_azure_cluster_location": "eastus",
   "cohesity_azure_host_name": "defender",
-  "cohesity_azure_domain_name": "fusion.guru",
+  "cohesity_azure_domain_name": "<Your Domain>",
   "cohesity_azure_ntp_servers": "2.almalinux.pool.ntp.org",
   "cohesity_azure_dns_server": "8.8.8.8",
   "cohesity_setup_tool_dir_full_path": "/home/cohesity/software",
@@ -138,7 +137,29 @@ az quota update --resource-name standardDSv2Family --scope /subscriptions/<subsc
 }
 ```
 
+There are other fields you can use but I didn't:
+```
+  "cohesity_azure_apps_subnet": "CUSTOMER_VALUE",  -> Extra subnet to be backed up
+  "cohesity_azure_apps_subnet_mask": "CUSTOMER_VALUE", -> Extra subnet mask to be backed up
+  "cohesity_azure_cluster_vhd_storage_account": "CUSTOMER_VALUE", -> if you don't give this an storage account will be created for you.
+  "azure_instance_deletion_protection": false, -> I just did not use this, I don't have details on what this changes.
+  "cohesity_azure_vault_account_name": "CUSTOMER_VALUE (Please provide external target details in case of xlarge clusters only)", -> External vault is for xlarge
+  "cohesity_azure_vault_container_name": "CUSTOMER_VALUE", -> External vault is for xlarge
+  "cohesity_azure_vault_access_key": "CUSTOMER_VALUE", -> External vault is for xlarge
+  "cohesity_azure_vault_ad_auth_client_id": "CUSTOMER_VALUE (Exactly one of access_key or client_id to be provided)", -> External vault is for xlarge
+  "cohesity_azure_tags": -> JSON key/value pair array for tags for management
 
+
+```
+
+
+
+
+You can first validate if the installation is fine:
+```
+sudo ./cohesity_azure_setup validate -cohesity_azure_setup_params_file=/home/cohesity/software/params.json
+```
+Then Just continue w
 
 
 
