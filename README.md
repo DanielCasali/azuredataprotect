@@ -6,7 +6,14 @@ This guide will help you install IBM Defender Data Protect in Azure and it aims 
 We will install the IBM Defender Data Protect endpoint using setup tools created by Cohesity. The tools provided are based on linux and a small instance will be enough, I am using 1 vCPU and 3.5 GB of memory. I also use Azure spot discount since it is a PoC and I don't mind to restart the VM in case it comes down. this Server will not be in the Data Path.
 
 # Configure the Setup instance for the install
-The tools will expoect to use the cohesity user by default and the `/home/cohesity` path as the isntall directory.
+The install tool will expect to use the cohesity user by default and the `/home/cohesity` path as the install directory.
+Create the user and change to the user:
+```
+[root@linux ~]# useradd cohesity
+[root@linux ~]# su - cohesity
+[cohesity@linux ~]$
+```
+
 
 
 # Download the Assets from Fix Central
@@ -15,13 +22,34 @@ The Assets are available for Download on FixCentral, we will download the versio
 2) Select Browse for Fixes -> Click Continue 
 3) Open the Show Contained Fixes sub-bullet under group_: STGDEF_2.0.16
 4) Select:
-   -> STGDEF_2.0.16_5 for the Azure Cluster VHD image
-   -> STGDEF_2.0.16_15 for the Azure setup tools
+   -> STGDEF_2.0.16_5 for the Azure Cluster VHD image `cohesity-azure-7.2.2_u2_release-20250718_86f4ecd0.vhd (34.03 GB)`
+   -> STGDEF_2.0.16_15 for the Azure setup tools `installer-cohesity_azure_setup-7.2.2_u2_release-20250718_86f4ecd0.tar.gz (134.59 MB)`
+5) Scroll down to the bottom of the Page and Click continue
+I personally use the HTTPS download method and I copy the download link and use wget or curl to download the Asset:
 
+```
+[cohesity@linux ~]$ wget https://<the link created>/cohesity-azure-7.2.2_u2_release-20250718_86f4ecd0.vhd
+--2025-10-31 15:14:19--  https://<the link created>/cohesity-azure-7.2.2_u2_release-20250718_86f4ecd0.vhd
+Resolving <Fully Qualified Domain Name> (<Fully Qualified Domain Name>)... <IP>
+Connecting to <Fully Qualified Domain Name> (<Fully Qualified Domain Name>)|<IP>|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 36537279488 (34G)
+Saving to: ‘cohesity-azure-7.2.2_u2_release-20250718_86f4ecd0.vhd’
 
+            cohesity-azur   0%[                                      ] 296.00K  1.33MB/s
+```
+Wait for it to finish or if there is bandwidth feel free to open another session and download the setup tools (mine did not as I consumed the 100MB/s I had).
+```
+[cohesity@linux ~]$ wget https://<the link created>/installer-cohesity_azure_setup-7.2.2_u2_release-20250718_86f4ecd0.tar.gz
+--2025-10-31 15:14:19--  https://<the link created>/installer-cohesity_azure_setup-7.2.2_u2_release-20250718_86f4ecd0.tar.gz
+Resolving <Fully Qualified Domain Name> (<Fully Qualified Domain Name>)... <IP>
+Connecting to <Fully Qualified Domain Name> (<Fully Qualified Domain Name>)|<IP>|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 36537279488 (34G)
+Saving to: ‘installer-cohesity_azure_setup-7.2.2_u2_release-20250718_86f4ecd0.tar.gz’
 
--> 
--> 
+            installer-coh   1%[                                      ] 2096.00K  2.02MB/s
+```
 
 ```
 az quota update --resource-name standardDSv2Family --scope /subscriptions/<subscription-id>/providers/Microsoft.Compute/locations/eastus --limit-object value=20
