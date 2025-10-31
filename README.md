@@ -3,12 +3,22 @@ This guide will help you install IBM Defender Data Protect in Azure and it aims 
 
 
 # Create a basic linux install and prepare for setup
-We will install the IBM Defender Data Protect endpoint using setup tools created by Cohesity. The tools provided are based on linux and a small linux instance will 
+We will install the IBM Defender Data Protect endpoint using setup tools created by Cohesity. The tools provided are based on linux and a small instance will be enough, I am using 1 vCPU and 3.5 GB of memory. I also use Azure spot discount since it is a PoC and I don't mind to restart the VM in case it comes down. this Server will not be in the Data Path.
+
+# Configure the Setup instance for the install
+The tools will expoect to use the cohesity user by default and the `/home/cohesity` path as the isntall directory.
 
 
 # Download the Assets from Fix Central
-The Assets are available for Download on FixCentral, after you login to Fixcentral:
-1) 
+The Assets are available for Download on FixCentral, we will download the version 2.0.16, so after you login to it:
+1) Search for IBM Storage Defender Select Intalled Version: All and Platform All -> Click Continue 
+2) Select Browse for Fixes -> Click Continue 
+3) Open the Show Contained Fixes sub-bullet under group_: STGDEF_2.0.16
+4) Select:
+   -> STGDEF_2.0.16_5 for the Azure Cluster VHD image
+   -> STGDEF_2.0.16_15 for the Azure setup tools
+
+
 
 -> 
 -> 
