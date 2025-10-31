@@ -11,7 +11,7 @@ The install tool will expect to use the cohesity user by default and the `/home/
 Create the user and change to the user:
 ```
 [root@linux ~]# useradd cohesity
-[root@linux ~]# usermod -g wheel cohesity
+[root@linux ~]# usermod -G wheel cohesity
 [root@linux ~]# su - cohesity
 [cohesity@linux ~]$
 ```
