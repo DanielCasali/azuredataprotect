@@ -193,6 +193,24 @@ I1031 17:36:16.219998  3481 azure_tool.cc:1128] -------------------- VMs creatio
 If the creation has issues
 ```
 ./iris_cli --output=prettyjson --username=admin --password=admin --server=10.0.0.7 --skip_password_prompt=true --skip_force_password_change=true cluster cloud-create name=azurecluster node-ips=10.0.0.7 subnet-gateway=10.0.0.1 subnet-mask=255.255.255.0 dns-server-ips=8.8.8.8 ntp-servers=2.almalinux.pool.ntp.org domain-names=fusion.guru hostname=cohesity metadata-fault-tolerance=0 enable-software-encryption=false cluster-size=small
+{
+  "clusterId": 4970849535689336,
+  "incarnationId": 1761938253658,
+  "clusterName": "azurecluster",
+  "clusterSwVersion": "7.2.2_u2_release-20250718_86f4ecd0",
+  "nodeStatus": [
+    {
+      "code": "KNoError",
+      "nodeId": 4751251431391864,
+      "nodeIps": [
+        "10.0.0.7",
+        "fe80::dc1d:5e0:a726:7363"
+      ],
+      "message": "Request to join the cluster having id 4970849535689336 is accepted\n"
+    }
+  ],
+  "message": " Please use \"cluster status\" command to get the latest status of the services on each node of the cluster.\n"
+}
 ```
 Maybe add this?
 ```
