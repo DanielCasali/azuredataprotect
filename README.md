@@ -1,5 +1,6 @@
 # IBM Storage Data Protect on Azure how-to
 This guide will help you install IBM Defender Data Protect in Azure and it aims to get a Backup endpoint in Azure created by Cohesity that connect seamlessly to the IBM Defender DMS Console.
+I thought I would have to create a Terraform for making the install easy but turns out it is so straightforward with the setup tool that I don't think it is worth the effort for one VM and an application ID.
 
 
 ## Create a basic linux install and prepare for setup
@@ -150,26 +151,48 @@ There are other fields that are possible and come on the example that you can us
   "cohesity_azure_tags": -> JSON key/value pair array for tags for management
 
 ```
-
-
-
-
-You can first validate if the installation is fine:
+Make sure to be on the /home/cohesity/software/ directory:
 ```
-sudo ./cohesity_azure_setup validate -cohesity_azure_setup_params_file=/home/cohesity/software/params.json
+[cohesity@linux ~]$ cd software
+[cohesity@linux software]$ pwd
+/home/cohesity/software
+[cohesity@linux software]$
 ```
-Then Just continue w
 
-
-
-
-
-
+You can first validate if the installation parameters are fine:
 ```
-sudo ./cohesity_azure_setup startup_cluster -cohesity_azure_setup_params_file=/home/cohesity/software/params.json -cohesity_azure_resource_group=chsty1761258242326
-sudo ./cohesity_azure_setup shutdown_cluster -cohesity_azure_setup_params_file=/home/cohesity/software/params.json -cohesity_azure_resource_group=chsty1761258242326
+[cohesity@linux software]$ sudo ./cohesity_azure_setup validate -cohesity_azure_setup_params_file=/home/cohesity/software/params.json
+.
+.
+.
+I1031 16:27:40.296535  3218 login_op.cc:362] Refreshed the access_token in connector_context
+I1031 16:27:40.296833  3218 azure_connector_base_op.cc:210] Acquiring semaphore.
+I1031 16:27:40.296914  3218 azure_connector_base_op.cc:197] Semaphore acquired.
+I1031 16:27:40.296972  3218 azure_cluster_manager.cc:152] Progress: Sending Throttled Curl Rpc
+I1031 16:27:40.604641  3218 azure_cluster_manager.cc:152] Progress: Got response for the Curl Rpc
+I1031 16:27:40.604871  3218 azure_cluster_manager.cc:152] Progress: Got final response for the Curl Rpc
+I1031 16:27:40.605414  3217 azure_tool.cc:1310] Successfully validated Azure credentials.
+[cohesity@linux software]$
+```
+
+# The rest of the Documentation will come later.
 
 
+Then Just continue with install:
+```
+sudo ./cohesity_azure_setup create_cluster -cohesity_azure_setup_params_file=/home/cohesity/software/params.json
+```
 
+If the creation has issues
+```
 ./iris_cli --output=prettyjson --username=admin --password=admin --server=10.0.0.7 --skip_password_prompt=true --skip_force_password_change=true cluster cloud-create name=azurecluster node-ips=10.0.0.7 subnet-gateway=10.0.0.1 subnet-mask=255.255.255.0 dns-server-ips=8.8.8.8 ntp-servers=2.almalinux.pool.ntp.org domain-names=fusion.guru hostname=cohesity metadata-fault-tolerance=0 enable-software-encryption=false cluster-size=small
+```
+
+
+You can control startup and shutdown of the cluster from this place:
+```
+sudo cohesity_azure_setup startup_cluster -cohesity_azure_setup_params_file=/home/cohesity/software/params.json -cohesity_azure_resource_group=defender1761258242326
+sudo cohesity_azure_setup shutdown_cluster -cohesity_azure_setup_params_file=/home/cohesity/software/params.json -cohesity_azure_resource_group=defender1761258242326
+
+
 ```
