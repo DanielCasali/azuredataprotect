@@ -103,7 +103,7 @@ az quota update --resource-name standardDSv2Family --scope /subscriptions/<subsc
 
 ## Install the cluster.
 
-First you need to ensure your params.json file is fine for use, here I have an example that I used with public DNS and NTP and IP address 10.0.0.7 on eastus location, be sure to change this if you
+First you need to ensure your params.json file is fine for use, here I have an example that I used with public DNS and NTP and IP address 10.0.0.7 on eastus location, be sure to change this on your parameters file too. This file is located at `/home/cohesity/software/params.json`.
 ```
 {
   "azure_application_id" : "<Your Application ID>",
@@ -137,7 +137,7 @@ First you need to ensure your params.json file is fine for use, here I have an e
 }
 ```
 
-There are other fields you can use but I didn't:
+There are other fields that are possible and come on the example that you can use but I didn't:
 ```
   "cohesity_azure_apps_subnet": "CUSTOMER_VALUE",  -> Extra subnet to be backed up
   "cohesity_azure_apps_subnet_mask": "CUSTOMER_VALUE", -> Extra subnet mask to be backed up
