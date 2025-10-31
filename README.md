@@ -96,12 +96,14 @@ software
 ```
 If you are stuck on the Username: prompt we are not using it yet, you may Control+C to interrupt the iris_cli program you will get a error dump but do not worry.
 
-
-
-
+## Fix the quota for your instances.
+The instance quota is normally not that high if you start for the first time, so you might want to use the az CLI to configure a higher quota, it will depend on your cluster but for this one VM. Be aware you need to Login first with `az login`.
 ```
 az quota update --resource-name standardDSv2Family --scope /subscriptions/<subscription-id>/providers/Microsoft.Compute/locations/eastus --limit-object value=20
 ```
+
+
+
 
 ```
 {
