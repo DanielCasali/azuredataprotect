@@ -113,7 +113,7 @@ First you need to ensure your params.json file is fine for use, here I have an e
   "azure_subscription_id" : "<Your Subscription ID>",
   "azure_is_subscription_us_gov_cloud" : false,
   "cohesity_azure_cluster_resource_group_name" : "defender",
-  "cohesity_azure_cluster_storage_account_prefix" : "defender",
+  "cohesity_azure_cluster_storage_account_prefix" : "defdr",
   "cohesity_azure_vm_name_prefix" : "defender",
   "cohesity_azure_virtual_network_resource_group_name" : "support_group",
   "cohesity_azure_virtual_network_name" : "support-vnet",
