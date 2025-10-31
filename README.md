@@ -175,12 +175,19 @@ I1031 16:27:40.605414  3217 azure_tool.cc:1310] Successfully validated Azure cre
 [cohesity@linux software]$
 ```
 
-# The rest of the Documentation will come later.
-
-
-Then Just continue with install:
+## Installing the Cluster.
+Then Just continue with install, if everything goes like mine your instalation minght fail:
 ```
-sudo ./cohesity_azure_setup create_cluster -cohesity_azure_setup_params_file=/home/cohesity/software/params.json
+[cohesity@linux software]$ sudo ./cohesity_azure_setup create_cluster -cohesity_azure_setup_params_file=/home/cohesity/software/params.json
+.
+.
+.
+Error: exec: "iris_cli": executable file not found in $PATH, Output:
+I1031 17:36:16.217752  3834 create_cohesity_cluster_op.cc:240] Azure Cohesity cluster creator stdout: Node:  10.0.0.7 is not reachable
+I1031 17:36:16.219625  3484 azure_tool.cc:1106] Progress: Create cluster failed with error code: 13, details: Subprocess failed, exit code: 13
+I1031 17:36:16.219806  3484 azure_tool.cc:1106] Progress: Please contact Cohesity support.
+I1031 17:36:16.219998  3481 azure_tool.cc:1128] -------------------- VMs creation failed with error: [kInvalidRequest]: Subprocess failed, exit code: 13
+[cohesity@linux software]$
 ```
 
 If the creation has issues
@@ -193,11 +200,11 @@ Maybe add this?
     	Default cluster password to use.
   -default_cluster_username string
 ```
+# The rest of the Documentation will come later.
 
 You can control startup and shutdown of the cluster from this place:
 ```
 sudo cohesity_azure_setup startup_cluster -cohesity_azure_setup_params_file=/home/cohesity/software/params.json -cohesity_azure_resource_group=defender1761258242326
 sudo cohesity_azure_setup shutdown_cluster -cohesity_azure_setup_params_file=/home/cohesity/software/params.json -cohesity_azure_resource_group=defender1761258242326
-
 
 ```
