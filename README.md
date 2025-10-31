@@ -10,10 +10,10 @@ The install tool will expect to use the cohesity user by default and the `/home/
 Create the user and change to the user:
 ```
 [root@linux ~]# useradd cohesity
+[root@linux ~]# usermod -g wheel cohesity
 [root@linux ~]# su - cohesity
 [cohesity@linux ~]$
 ```
-
 
 
 # Download the Assets from Fix Central
@@ -26,8 +26,8 @@ The Assets are available for Download on FixCentral, we will download the versio
 5) Also Select:
    -> STGDEF_2.0.16_15 for the Azure setup tools `installer-cohesity_azure_setup-7.2.2_u2_release-20250718_86f4ecd0.tar.gz (134.59 MB)`
 6) Scroll down to the bottom of the Page and Click continue
-I personally use the HTTPS download method and I copy the download link and use wget or curl to download the Asset:
-
+I personally use the HTTPS download method and I copy the download link and use wget or curl to download the asset.
+7) You can download it directly on the Linux box.
 ```
 [cohesity@linux ~]$ wget https://<the link created>/cohesity-azure-7.2.2_u2_release-20250718_86f4ecd0.vhd
 --2025-10-31 15:14:19--  https://<the link created>/cohesity-azure-7.2.2_u2_release-20250718_86f4ecd0.vhd
@@ -39,7 +39,7 @@ Saving to: ‘cohesity-azure-7.2.2_u2_release-20250718_86f4ecd0.vhd’
 
             cohesity-azur   0%[                                      ] 296.00K  1.33MB/s
 ```
-Wait for it to finish or if there is bandwidth feel free to open another session and download the setup tools (mine did not as I consumed the 100MB/s I had).
+8) Wait for it to finish or if there is bandwidth feel free to open another session and download the setup tools (mine did not as I consumed the 100MB/s I had).
 ```
 [cohesity@linux ~]$ wget https://<the link created>/installer-cohesity_azure_setup-7.2.2_u2_release-20250718_86f4ecd0.tar.gz
 --2025-10-31 15:14:19--  https://<the link created>/installer-cohesity_azure_setup-7.2.2_u2_release-20250718_86f4ecd0.tar.gz
@@ -51,6 +51,21 @@ Saving to: ‘installer-cohesity_azure_setup-7.2.2_u2_release-20250718_86f4ecd0.
 
             installer-coh   1%[                                      ] 2096.00K  2.02MB/s
 ```
+
+9) Decompress the setup tool:
+```
+tar -xvf installer-cohesity_azure_setup-7.2.2_u2_release-20250718_86f4ecd0.tar.gz
+cohesity_azure_setup-7.2.2_u2_release-20250718_86f4ecd0.tar.gz
+install.sh
+```
+
+10) Run the installer
+For some reason it does not get the path right (it adds some /home/cohesity/bin/ but the software so not there so I link it):
+```
+
+```
+
+
 
 ```
 az quota update --resource-name standardDSv2Family --scope /subscriptions/<subscription-id>/providers/Microsoft.Compute/locations/eastus --limit-object value=20
