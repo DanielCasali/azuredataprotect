@@ -149,7 +149,6 @@ There are other fields you can use but I didn't:
   "cohesity_azure_vault_ad_auth_client_id": "CUSTOMER_VALUE (Exactly one of access_key or client_id to be provided)", -> External vault is for xlarge
   "cohesity_azure_tags": -> JSON key/value pair array for tags for management
 
-
 ```
 
 
