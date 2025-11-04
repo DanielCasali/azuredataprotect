@@ -278,7 +278,7 @@ Installed:
 Complete!
 ```
 
-If you want the documentation also select the STGDEF_2.0.23
+If you want the documentation also select the STGDEF_2.0.23. The install is pretty much install the RPM on a RedHat Linux distro, the agent will com up and listen on 59999 and 50051.
 1) Search for IBM Storage Defender Select Intalled Version: All and Platform All -> Click Continue 
 2) Select Browse for Fixes -> Click Continue 
 3) Open the Show Contained Fixes sub-bullet under group_: STGDEF_2.0.23
