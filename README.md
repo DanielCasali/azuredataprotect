@@ -218,6 +218,69 @@ Maybe add this?
     	Default cluster password to use.
   -default_cluster_username string
 ```
+
+## Install Agent
+
+If you want to do a file level backup and Restore in Azure Agents are available to download.
+The Assets are available for Download on FixCentral, we will download the version 2.0.16, so after you login to it:
+1) Search for IBM Storage Defender Select Intalled Version: All and Platform All -> Click Continue 
+2) Select Browse for Fixes -> Click Continue 
+3) Open the Show Contained Fixes sub-bullet under group_: STGDEF_2.0.36
+4) Select:
+   -> STGDEF_2.0.16_36 for the Linux Agent Standard `el-cohesity-agent-7.2.2_u2-1.x86_64.rpm (67.49 MB)`
+6) Scroll down to the bottom of the Page and Click continue
+I personally use the HTTPS download method and I copy the download link and use wget or curl to download the asset.
+7) You can download it directly on the Linux box.
+
+Install using dnf... I used the root user for the Agent if you want to use cohesity user you have to set the variable COHESITYUSER.
+
+```
+[cohesity@linux ~]$ sudo dnf install -y el-cohesity-agent-7.2.2_u2-1.x86_64.rpm
+Last metadata expiration check: 0:20:09 ago on Tue 04 Nov 2025 03:33:26 PM UTC.
+Dependencies resolved.
+===================================================================================================
+ Package                   Architecture      Version                 Repository               Size
+===================================================================================================
+Installing:
+ cohesity-agent            x86_64            7.2.2_u2-1              @commandline             67 M
+
+Transaction Summary
+===================================================================================================
+Install  1 Package
+
+Total size: 67 M
+Installed size: 241 M
+Downloading Packages:
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                                           1/1
+  Running scriptlet: cohesity-agent-7.2.2_u2-1.x86_64                                          1/1
+Environment variable COHESITYUSER not defined..will Use root account
+Service has already been stopped
+
+  Installing       : cohesity-agent-7.2.2_u2-1.x86_64                                          1/1
+  Running scriptlet: cohesity-agent-7.2.2_u2-1.x86_64                                          1/1
+WARNING: LVM is not installed. Block based backups will not be allowed.
+Using resultant set_env file as: /opt/cohesity/agent/software/crux/bin/set_env.sh
+Writing env of this upgrade to: /opt/cohesity/agent/software/crux/bin/set_env.sh
+Adding systemd service
+Created symlink /etc/systemd/system/multi-user.target.wants/cohesity-agent.service → /usr/lib/systemd/system/cohesity-agent.service.
+Register cohesity-agent service to systemd succesful.
+
+  Verifying        : cohesity-agent-7.2.2_u2-1.x86_64                                          1/1
+
+Installed:
+  cohesity-agent-7.2.2_u2-1.x86_64
+
+Complete!
+```
+
+
+
+
 # The rest of the Documentation will come later.
 
 You can control startup and shutdown of the cluster from this place:
