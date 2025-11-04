@@ -278,6 +278,15 @@ Installed:
 Complete!
 ```
 
+If you want the documentation also select the STGDEF_2.0.23
+1) Search for IBM Storage Defender Select Intalled Version: All and Platform All -> Click Continue 
+2) Select Browse for Fixes -> Click Continue 
+3) Open the Show Contained Fixes sub-bullet under group_: STGDEF_2.0.23
+4) Select:
+   -> STGDEF_2.0.16_23 for the Linux Agent Documentation `el-cohesity-agent-7.2.2_u2-1.x86_64.rpm (67.49 MB)`
+6) Scroll down to the bottom of the Page and Click continue
+I personally use the HTTPS download method and I copy the download link and use wget or curl to download the asset.
+7) You can download it directly on the Linux box.
 
 
 
