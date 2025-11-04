@@ -285,8 +285,8 @@ If you want the documentation also select the STGDEF_2.0.23
 4) Select:
    -> STGDEF_2.0.16_23 for the Linux Agent Documentation `el-cohesity-agent-7.2.2_u2-1.x86_64.rpm (67.49 MB)`
 6) Scroll down to the bottom of the Page and Click continue
-I personally use the HTTPS download method and I copy the download link and use wget or curl to download the asset.
-7) You can download it directly on the Linux box.
+I personally use the HTTPS download method and I copy the download link using Save As:
+7) You can download it to read, it is a docx so you will need a tool that can read this file type (Like MS Office or LibreOffice). 
 
 
 
