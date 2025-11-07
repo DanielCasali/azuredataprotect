@@ -22,7 +22,7 @@ The Assets are available for Download on FixCentral, we will download the versio
 2) Select Browse for Fixes -> Click Continue 
 3) Open the Show Contained Fixes sub-bullet under group_: STGDEF_2.0.16
 4) Select:
-   -> STGDEF_2.0.16_5 for the Azure Cluster VHD image `cohesity-azure-7.2.2_u2_release-20250718_86f4ecd0.vhd (34.03 GB)`
+   -> STGDEF_2.0.16_9 for the Azure Cluster VHD image `cohesity-azure-7.2.2_u2_release-20250718_86f4ecd0.vhd (34.03 GB)`
 5) Also Select:
    -> STGDEF_2.0.16_15 for the Azure setup tools `installer-cohesity_azure_setup-7.2.2_u2_release-20250718_86f4ecd0.tar.gz (134.59 MB)`
 6) Scroll down to the bottom of the Page and Click continue
